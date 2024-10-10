@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Takes a list mxd_lst of integers and floats and returns 
+Takes a list mxd_lst of integers and floats and returns
 their sum as a float
 """
 
