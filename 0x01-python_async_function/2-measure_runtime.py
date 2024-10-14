@@ -5,16 +5,16 @@ Async routine that returns the list of all the delays (float values)
 
 import asyncio
 import time
-wait_n = __import__('1-concurrent_coroutines').wait_random
+wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
 def measure_time(n: int, max_delay: int) -> float:
     """
     Function that uses other async functions
     """
-    startTime = time.time()
+    startTime = time.perf_counter()
     asyncio.run(wait_n(n, max_delay))
-    endTime = time.time()
+    endTime = time.perf_counter()
 
     totalTime = endTime - startTime
-    return totalTime/n
+    return (totalTime/n)
