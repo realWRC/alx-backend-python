@@ -13,12 +13,12 @@ async def measure_runtime() -> float:
     The coroutine will loop 10 times, each time asynchronously wait 1 second,
     then yield a random number between 0 and 10. Use the random module.
     """
-    startTime = time.perf_counter()
+    startTime = time.time()
     await asyncio.gather(
             async_comprehension(),
             async_comprehension(),
             async_comprehension(),
             async_comprehension()
     )
-    endTime = time.perf_counter()
+    endTime = time.time()
     return (endTime - startTime)
