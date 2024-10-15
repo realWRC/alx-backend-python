@@ -12,4 +12,4 @@ async def async_comprehension():
     The coroutine will loop 10 times, each time asynchronously wait 1 second,
     then yield a random number between 0 and 10. Use the random module.
     """
-    return[i async for i in async_generator()]
+    return [i async for i in async_generator()]
