@@ -6,7 +6,7 @@ Unittests for python code implimemnted in directory
 import unittest
 from unittest.mock import patch
 from parameterized import parameterized
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -49,3 +49,39 @@ class TestGetJson(unittest.TestCase):
         result = get_json(test_url)
         mock_get.assert_called_once_with(test_url)
         self.assertEqual(result, test_payload)
+
+
+class TestMemoize(unittest.TestCase):
+    """Tests for memorize method of utils"""
+
+    def test_memoize(self):
+        """
+        Tests memorize
+        """
+        class TestClass:
+            """
+            As described
+            """
+            def a_method(self):
+                """
+                Method to be memoized/stored
+                """
+                return 42
+
+            @memoize
+            def a_property(self):
+                """
+                Using memoize property
+                """
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method', return_value=42)\
+                as mock_method:
+            test_obj = TestClass()
+            result_first_call = test_obj.a_property
+            result_second_call = test_obj.a_property
+
+            mock_method.assert_called_once()
+
+            self.assertEqual(result_first_call, 42)
+            self.assertEqual(result_second_call, 42)
